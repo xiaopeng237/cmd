@@ -1,0 +1,5 @@
+/home/vmuser/git/test/build/CMakeFiles/rebuild_cache.dir
+/home/vmuser/git/test/build/CMakeFiles/edit_cache.dir
+/home/vmuser/git/test/build/src/CMakeFiles/rebuild_cache.dir
+/home/vmuser/git/test/build/src/CMakeFiles/edit_cache.dir
+/home/vmuser/git/test/build/src/CMakeFiles/test.dir

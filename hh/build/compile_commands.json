@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/vmuser/git/hh/build",
+  "command": "/usr/bin/c++    -g   -o CMakeFiles/HH.dir/main.cpp.o -c /home/vmuser/git/hh/main.cpp",
+  "file": "/home/vmuser/git/hh/main.cpp"
+}
+]

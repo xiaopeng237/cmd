@@ -1,0 +1,1 @@
+/home/vmuser/arm-fsl-linux-gnueabi/bin/arm-fsl-linux-gnueabi-g++  -O2 -g  -g  -rdynamic CMakeFiles/test.dir/test.cpp.o  -o ../../bin/test 

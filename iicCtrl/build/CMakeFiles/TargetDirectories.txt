@@ -1,0 +1,4 @@
+/home/vmuser/git/iicCtrl/build/CMakeFiles/rebuild_cache.dir
+/home/vmuser/git/iicCtrl/build/CMakeFiles/edit_cache.dir
+/home/vmuser/git/iicCtrl/build/CMakeFiles/iicCtrl_static.dir
+/home/vmuser/git/iicCtrl/build/CMakeFiles/iicCtrl_shared.dir

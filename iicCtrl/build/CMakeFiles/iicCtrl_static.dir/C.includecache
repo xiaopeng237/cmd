@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/vmuser/git/iicCtrl/src/iicCtrl.c
+iicCtrl.h
+/home/vmuser/git/iicCtrl/src/iicCtrl.h
+stdarg.h
+-
+
+/home/vmuser/git/iicCtrl/src/iicCtrl.h
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+fcntl.h
+-
+sys/ioctl.h
+-
+errno.h
+-
+
