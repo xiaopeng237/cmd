@@ -175,18 +175,74 @@ void read_energy(void)
 {
 	int i = 0;
     unsigned short int readData = 0;
-	int spiDataEnergy[8192];
+	unsigned int spiDataEnergy[8192];
 	int ret;
 	//start
 	spi_read(0, 0, 0x001D, 2, &readData);
 	//read data
 	for(i = 0;i < 8192; i++){
-		spiDataEnergy[i] = spi_read(0, 0, 0x0003, 2, &readData);
+		spi_read(0, 0, 0x0003, 2, &readData);
+		spiDataEnergy[i] = (unsigned int)readData;
 		printf("num, %d,energy data, %d \n", i, readData);
     }
+	// for(i = 0;i < 120; i++){
+	// 	spiDataEnergy[i] = 0x66;
+    // }
+	energy_check(spiDataEnergy);
 
 }
+void energy_check(unsigned int * energyData)
+{
+	int i;
+	int count = 0;
 
+	for(i = 500;i < 5000; i++){
+		if ((energyData[i] == energyData[i + 1]) &&
+		(energyData[i + 1] == energyData[i + 2]) &&
+		(energyData[i + 2] == energyData[i + 3]) &&
+		(energyData[i + 3] == energyData[i + 4]) &&
+		(energyData[i + 4] == energyData[i + 5]) &&
+		(energyData[i + 5] == energyData[i + 6]))
+		{
+			count++;
+		}
+
+    }
+
+    char data_time1[25] = {};
+    char spi_en[204800] = {};
+    char p_log1[205800] = {};//add data
+
+    FILE *fd_en;
+    fd_en = fopen("/usr/local/apache/htdocs/yangpai/data-eu-gdp-growth.json", "w+b");
+    for(i = 0; i < 8192; i++)
+    {
+        sprintf(data_time1, "[%d,%d],", i, energyData[i]);
+        strcat(spi_en, data_time1);
+    }
+
+    sprintf(p_log1, "%s%s%s", "{\"label\":\"能谱曲线\",\"data\":[",spi_en,"[8192,0]]}");
+
+    fputs(p_log1, fd_en);
+    fclose(fd_en);
+
+	if (count > 100)
+	{
+		fd_en = fopen("/gp/energy.json", "w+b");
+    	for(i = 0; i < 8192; i++)
+    	{
+        	sprintf(data_time1, "[%d,%d],", i, energyData[i]);
+        	strcat(spi_en, data_time1);
+    	}
+
+    	sprintf(p_log1, "%s%s%s", "{\"label\":\"能谱曲线\",\"data\":[",spi_en,"[8192,0]]}");
+
+    	fputs(p_log1, fd_en);
+    	fclose(fd_en);
+	}
+
+	return 0;
+}
 /*
  * 函数说明：触发窗口计数
  * 入参说明：
@@ -220,7 +276,7 @@ void read_win(void)
 	{
 		usleep(100);
 		spi_read(0, 0, 0x000E, 2, &readData);
-		printf("SPI read 0x000E data = %x  \n",readData);
+		//printf("SPI read 0x000E data = %x  \n",readData);
 		if (readData & 0x0020)
 		{
 			break;
@@ -235,7 +291,7 @@ void read_win(void)
 	for (i = 0; i < 200; i++)
 	{
 		spi_read(0, 0, 0x0010, 2, &readData);
-		printf("SPI read 0x0010 data = %x  \n",readData);
+		//printf("SPI read 0x0010 data = %x  \n",readData);
 		if (readData & 0xaa55)
 		{
 			win[0] = 0xaa55;
@@ -315,8 +371,8 @@ void read_win(void)
 			}
 		}
 	}
-	printf("aveWinA %d aveWinB %d aveWinC %d aveWinD %d aveWinE %d \n",
-		(int)aveWin[0],(int)aveWin[1],(int)aveWin[2],(int)aveWin[3],(int)aveWin[4]);
+	//printf("aveWinA %d aveWinB %d aveWinC %d aveWinD %d aveWinE %d \n",
+	//	(int)aveWin[0],(int)aveWin[1],(int)aveWin[2],(int)aveWin[3],(int)aveWin[4]);
 
 	for(j = 0; j < 200; j++)
     {
@@ -326,7 +382,7 @@ void read_win(void)
 		winSum[3] = winSum[3] + win_C[j][3];
 		winSum[4] = winSum[4] + win_C[j][4];	
     }
-	printf("winA %d winB %d winC %d winD %d winE %d \n",
+	printf(" win %d\n win %d \n win %d \n win %d \n win %d \n",
 		(int)winSum[0],(int)winSum[1],(int)winSum[2],(int)winSum[3],(int)winSum[4]);
 	return;
 }
