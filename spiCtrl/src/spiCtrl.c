@@ -135,6 +135,30 @@ int spi_read(int busId, int cs, int Register, int len, unsigned short int *spiDa
 
 	return 0;
 }
+
+/*
+* 用于脉冲数据网页显示
+*/
+void pluseSendToWeb(unsigned int * data)
+{
+	char data_time1[25] = {};
+    char spi_en[8192] = {};
+    char p_log1[40966] = {};//add data
+	int i;
+	FILE *fd_en;
+	fd_en = fopen("/usr/local/apache/htdocs/yangpai/pulse_data.json", "w+b");
+
+    for(i = 0; i < 500; i++)
+    {
+        sprintf(data_time1, "[%d,%d],", i*10, data[i+10]);
+        strcat(spi_en, data_time1);
+    }
+    sprintf(p_log1, "%s%s%s", "{\"label\":\"脉冲曲线 x:t/ns y:v/mv\",\"data\":[",spi_en,"[5000,0]]}");
+
+    fputs(p_log1, fd_en);
+    fclose(fd_en);
+	return;
+}
 /*
  * 函数说明：SPI 读取脉冲数据
  * 入参说明：
@@ -143,7 +167,7 @@ void read_pluse(void)
 {
 	int i = 0;
     unsigned short int readData = 0;
-	int SpiData_dpul[512];
+	unsigned int SpiData_dpul[512];
 	int ret;
 
 	//start
@@ -162,9 +186,11 @@ void read_pluse(void)
 
 	//read data
 	for(i = 0;i < 512; i++){
-		SpiData_dpul[i] = spi_read(0, 0, 0x000f, 2, &readData);
-		printf("num, %d,pluse data, %d \n", i * 10, readData);
+		spi_read(0, 0, 0x000f, 2, &readData);
+		SpiData_dpul[i] = (unsigned int)readData;
+		printf("num, %d,pluse data, %d \n", i, SpiData_dpul[i]);
     }
+	pluseSendToWeb(SpiData_dpul);
 	return;
 }
 /*
@@ -177,6 +203,7 @@ void read_energy(void)
     unsigned short int readData = 0;
 	unsigned int spiDataEnergy[8192];
 	int ret;
+
 	//start
 	spi_read(0, 0, 0x001D, 2, &readData);
 	//read data
@@ -196,7 +223,7 @@ void energy_check(unsigned int * energyData)
 	int i;
 	int count = 0;
 
-	for(i = 500;i < 5000; i++){
+	for(i = 100;i < 5000; i++){
 		if ((energyData[i] == energyData[i + 1]) &&
 		(energyData[i + 1] == energyData[i + 2]) &&
 		(energyData[i + 2] == energyData[i + 3]) &&
@@ -226,7 +253,7 @@ void energy_check(unsigned int * energyData)
     fputs(p_log1, fd_en);
     fclose(fd_en);
 
-	if (count > 100)
+	if (count > 50)
 	{
 		fd_en = fopen("/gp/energy.json", "w+b");
     	for(i = 0; i < 8192; i++)
@@ -241,7 +268,7 @@ void energy_check(unsigned int * energyData)
     	fclose(fd_en);
 	}
 
-	return 0;
+	return;
 }
 /*
  * 函数说明：触发窗口计数
