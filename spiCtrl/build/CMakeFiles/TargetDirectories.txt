@@ -1,0 +1,2 @@
+/home/admin/repo/cmd/spiCtrl/build/CMakeFiles/spiCtrl_shared.dir
+/home/admin/repo/cmd/spiCtrl/build/CMakeFiles/spiCtrl_static.dir

@@ -1,4 +1,4 @@
-#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
 
 #IncludeRegexScan: ^.*$
 
@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/vmuser/git/iicCtrl/src/iicCtrl.c
+/home/admin/repo/cmd/iicCtrl/src/iicCtrl.c
 iicCtrl.h
-/home/vmuser/git/iicCtrl/src/iicCtrl.h
+/home/admin/repo/cmd/iicCtrl/src/iicCtrl.h
 stdarg.h
 -
 
-/home/vmuser/git/iicCtrl/src/iicCtrl.h
+/home/admin/repo/cmd/iicCtrl/src/iicCtrl.h
 stdio.h
 -
 stdlib.h

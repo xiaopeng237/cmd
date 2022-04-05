@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/admin/repo/cmd/spiCtrl/src/spiCtrl.c
+spiCtrl.h
+/home/admin/repo/cmd/spiCtrl/src/spiCtrl.h
+stdarg.h
+-
+
+/home/admin/repo/cmd/spiCtrl/src/spiCtrl.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/time.h
+-
+pthread.h
+-
+unistd.h
+-
+stdint.h
+-
+fcntl.h
+-
+sys/ioctl.h
+-
+linux/spi/spidev.h
+-
+

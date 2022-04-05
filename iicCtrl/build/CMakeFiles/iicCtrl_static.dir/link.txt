@@ -1,2 +1,2 @@
-/usr/bin/ar qc ../lib/libiicCtrl.a  CMakeFiles/iicCtrl_static.dir/src/iicCtrl.c.o
+/usr/bin/ar cr ../lib/libiicCtrl.a  CMakeFiles/iicCtrl_static.dir/src/iicCtrl.c.o
 /usr/bin/ranlib ../lib/libiicCtrl.a
