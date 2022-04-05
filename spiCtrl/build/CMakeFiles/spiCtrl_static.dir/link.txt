@@ -1,2 +1,0 @@
-/usr/bin/ar cr ../lib/libspiCtrl.a  CMakeFiles/spiCtrl_static.dir/src/spiCtrl.c.o
-/usr/bin/ranlib ../lib/libspiCtrl.a

@@ -1,1 +1,0 @@
-arm-fsl-linux-gnueabi-gcc  -O2 -g   -g    CMakeFiles/cmd.dir/cmd.c.o  -o ../../bin/cmd -rdynamic -ldl 

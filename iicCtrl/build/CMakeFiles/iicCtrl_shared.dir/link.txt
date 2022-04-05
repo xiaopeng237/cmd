@@ -1,1 +1,0 @@
-arm-fsl-linux-gnueabi-gcc  -fPIC -O2 -g     -shared -Wl,-soname,libiicCtrl.so -o ../lib/libiicCtrl.so CMakeFiles/iicCtrl_shared.dir/src/iicCtrl.c.o 

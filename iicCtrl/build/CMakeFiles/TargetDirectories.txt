@@ -1,2 +1,0 @@
-/home/admin/repo/cmd/iicCtrl/build/CMakeFiles/iicCtrl_shared.dir
-/home/admin/repo/cmd/iicCtrl/build/CMakeFiles/iicCtrl_static.dir

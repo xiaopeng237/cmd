@@ -1,1 +1,0 @@
-arm-fsl-linux-gnueabi-gcc  -fPIC -O2 -g     -shared -Wl,-soname,libspiCtrl.so -o ../lib/libspiCtrl.so CMakeFiles/spiCtrl_shared.dir/src/spiCtrl.c.o 
